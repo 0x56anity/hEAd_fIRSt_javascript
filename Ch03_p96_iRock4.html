@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>iRock - The Virtual Pet Rock</title>
+        <script type="text/javascript">
+            var userName = "";
+            function touchRock(){
+                if(userName == ""){
+                    userName = prompt("What is your name?", "Enter your name here.")
+                    alert("It is good to meet you, " + userName + ".");
+                    document.getElementById("rockImg").src = "img/rock_happy.png";
+                }
+                else {
+                    alert("<3" + userName + ".");
+                    document.getElementById("rockImg").src = "img/rock_happy.png";
+                }
+                setTimeout("document.getElementById('rockImg').src = 'img/rock.png'", 15*1000);
+            }
+            
+        </script>
+    </head>
+    <body onload="alert('Hello, I am you pet rock.');" >
+        
+        <div style="margin-top: 100px; text-align: center;">
+            <img id="rockImg" src="img/rock.png" alt="iRock" onclick="touchRock()" style="cursor: pointer;"/>
+        </div>
+    </body>
+</html>

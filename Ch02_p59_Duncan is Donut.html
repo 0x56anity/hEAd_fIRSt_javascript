@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Duncan's Just-In-Time Donuts</title>
+        <link rel="stylesheet" type="text/css" href="dounts.css" />
+        <style>
+            .field {
+                text-align: right;
+                margin: 5px;
+            }
+            #frame {
+                text-align: center;
+                margin: 1em;
+            }
+            i, h2 {
+                text-align: center;
+            }
+            * {
+                font-family: "Microsoft JhengHei";
+            }
+        </style>
+        <script type="text/javascript">
+            function updateOrder(){
+                const TAXRATE = 0.0925;    //稅率
+                const DONUTPRICE = 0.50; //甜甜圈價格
+                var numCakeDonuts = parseInt(document.getElementById("cakedonuts").value);
+                var numGlazedDonuts = parseInt(document.getElementById("glazeddonuts").value);
+                if(isNaN(numCakeDonuts))
+                    numCakeDonuts = 0;
+                if(isNaN(numGlazedDonuts))
+                    numGlazedDonuts = 0;
+                var subTotal = (numGlazedDonuts + numCakeDonuts) * DONUTPRICE;
+                var tax = subTotal * TAXRATE;
+                var total = subTotal + tax;
+
+                document.getElementById("subtotla").value = "$" + subTotal.toFixed(2);
+                document.getElementById("tax").value = "$" + tax.toFixed(2);
+                document.getElementById("total").value = "$" + total.toFixed(2);
+                
+            }
+            function placeOrder(){
+                if(document.getElementById("name").value == "")
+                    alert("I'm Sorry but you must provide your name before submitting an order.");
+                else if(document.getElementById("pickupminutes").value == "" || isNaN(document.getElementById("pickupminutes").value))
+                    alert("I'm Sorry but you most provide the number of minutes until pick-up" + " before submitting an order.");
+                form.submit();
+            }
+        </script>
+    </head>
+    <body>
+        <h2>Duncan's Just-In-Time Donuts</h2>
+        <i>All donuts 50 cents each, cake or glazed!</i>
+        <div id="frame">
+            <form name="orderform" action="donuts.php" method="POST">
+                <div class="field">
+                    Name: <input type="text" id="name" name="name" value="" />
+                </div>
+                <div class="field" title="蛋糕甜甜圈">
+                    # of cake donuts: <input type="number" id="cakedonuts" name="cakedonuts" value="" onchange="updateOrder();" />
+                </div>
+                <div class="field" title="亮面甜甜圈">
+                    # of glazed donuts: <input type="number" id="glazeddonuts" name="glazeddonuts" value="" onchange="updateOrder();" />
+                </div>
+                <div class="field">
+                    Minutes 'tll pickup: <input type="text" id="pickupmintes"  value="" onchange="updateOrder();" />
+                </div>
+                <div class="field">
+                    Subtotal: <input type="text" id="subtotla"  value=""/>
+                </div>
+                <div class="field">
+                     Tax: <input type="text" id="tax"  value="" />
+                </div>
+                <div class="field">
+                     Total: <input type="text" id="total"  value=""/>
+                </div>
+                
+
+                <div class="field">
+                    <input type="button" value="Place Order" onclick="placeOrder(this.form);" />
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
