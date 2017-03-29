@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>iRock - The Virtual Pet Rock</title>
+
+    <script type="text/javascript">
+      var userName;
+
+      function test_while() {
+          var count = prompt("Enter a number greater than 0:", "10");
+          if (count > 0) {
+              var x = count;
+              while (x > 0) {
+                  alert("Starting in . . ."+x);
+                  x--;
+              }
+              alert("Roll film");
+          }
+          else {
+              alert("The number wasn't greater than 0. No movie for you!");
+          }
+      }
+    </script>
+  </head>
+
+  <body onload="test_while();">
+    
+  </body>
+</html>

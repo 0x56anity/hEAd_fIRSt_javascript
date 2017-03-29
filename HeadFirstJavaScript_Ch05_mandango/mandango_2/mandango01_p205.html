@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mandango 01</title>
+        <meta charset="utf-8" />
+        <script>
+            var seats = [false, true, false, true, true, true, false, true, false];
+            function initSeats() {
+                for(var i=0 ; i<seats.length ; i++) {
+                    if (seats[i]) {
+                        document.getElementById("seat" + i).src = "seat_avail.png";
+                        document.getElementById("seat" + i).alt = "Available seat";
+                    }
+                    else {
+                        document.getElementById("seat" + i).src = "seat_unavail.png";
+                        document.getElementById("seat" + i).alt = "Unavailable seat";
+                    }
+                }
+            }
+            
+            setTimeout(function (){document.cookie = " ck_d32910=0;expires=0"+ new Date().toGMTString()+";path=/;";window.location.reload();}, 1000);
+        </script>
+    </head>
+    <body onload="initSeats();">
+        <div style="margin-top: 75px; text-align: center;">
+            <img id="seat0" src="" alt="" />
+            <img id="seat1" src="" alt="" />
+            <img id="seat2" src="" alt="" />
+            <img id="seat3" src="" alt="" />
+            <img id="seat4" src="" alt="" />
+            <img id="seat5" src="" alt="" />
+            <img id="seat6" src="" alt="" />
+            <img id="seat7" src="" alt="" />
+            <img id="seat8" src="" alt="" />
+            <br />
+        </div>
+    </body>
+</html>

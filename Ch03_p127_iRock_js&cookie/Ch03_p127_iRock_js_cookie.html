@@ -1,0 +1,57 @@
+<!--<!DOCTYPE html>-->
+<!--加上<!DOCTYPE html> document.getElementById("rockImg").style.height = (document.body.clientHeight - 100) * 0.9; 就有問題-->
+<html>
+    <head>
+        <title>iRock - The Virtual Pet Rock</title>
+        <script type="text/javascript" src="./cookie.js"></script>
+        <script type="text/javascript">
+            var userName;
+            function touchRock(){
+                if(userName){
+
+                    alert("I like the attention, " + userName + ". Thank you.");
+                }
+                else {
+                    
+                    userName = prompt("What is your name?","Enter your name here.");
+                    if (userName) {
+                        alert("It is good meet you," + userName + ".");
+                        if (navigator.cookieEnabled) {
+                            writeCookie("irock_username", userName, 5);
+                        }
+                        else {
+                            alert("Sorry, Cookie are not supported . enabled in your browser, i won't remember you later.\n 抱歉, Cookie功能在你的瀏覽器沒有被支援或是被啟用，我等等沒有辦法記住你。")
+                        }
+                        
+                    }
+                }
+                document.getElementById("rockImg").src = "./rock_happy.png";
+                setTimeout("document.getElementById('rockImg').src = './rock.png'", 4.5*1000);
+            }
+
+            function resizeRock(){
+                // console.log = (document.body.clientHeight - 100) * 0.9;
+                document.getElementById("rockImg").style.height = (document.body.clientHeight - 100) * 0.9;
+            }
+
+            function greetUser(){
+                if(navigator.cookieEnabled) {
+                    userName = readCookie("irock_username");
+                }
+                
+                if(userName)
+                    alert("Hello " + userName + ", I missed you.");
+                else
+                    alert('Hello, I am you pet rock.');
+            }
+
+        </script>
+    </head>
+    <body onload="greetUser();" onresize="resizeRock();">
+        
+        <div style="margin-top: 100px; text-align: center;"> 
+            <!--background: rgba(0, 0, 255, .05);-->
+            <img id="rockImg" src="./rock.png" alt="iRock" onclick="touchRock()" style="cursor: pointer;"/>
+        </div>
+    </body>
+</html>
