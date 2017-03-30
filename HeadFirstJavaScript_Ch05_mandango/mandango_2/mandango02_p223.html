@@ -12,7 +12,7 @@
             function initSeats() {
                 for(var i=0 ; i<seats.length ; i++) {
                     if (seats[i]) {
-                        document.getElementById("seat" + i).src = "seat_avail.png";
+                        document.getElementById("seat" + (i * seats[i].length)).src = "seat_avail.png";
                         document.getElementById("seat" + i).alt = "Available seat";
                     }
                     else {

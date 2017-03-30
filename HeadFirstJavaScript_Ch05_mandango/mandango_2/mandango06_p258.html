@@ -41,16 +41,14 @@
                         if (seats[i][j] && seats[i][j+1] && seats[i][j+2]) {
                             //Set the seat selection and update the appearance of the seats
                             selSeat = i * seats[i].length + j;
-                            document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_select.png";
-                            document.getElementById("seat" + (i * seats[i].length + j)).alt = "Your seat";
-                            document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_select.png";
-                            document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Your seat";
-                            document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_select.png";
-                            document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Your seat";
-
+                            
+                            setSeat((i * seats[i].length + j), "select", "Your seat");
+                            setSeat((i * seats[i].length + j + 1), "select", "Your seat");
+                            setSeat((i * seats[i].length + j + 2), "select", "Your seat");
+                            
                             //Prompt the user to accept the seats
                             //提示使用者接受座位
-                            var accept = confirm("Seats " + (j + 1) + " through" + (j + 3) + " in Row " + (i + 1) + "are available. Accept?");
+                            var accept = confirm("Seats " + (j + 1) + " through " + (j + 3) + " in Row " + (i + 1) + " are available. \nAccept?");
 
                             if (accept) {
                                 // The user accepted the seats, so we're done (break out of the inner loop)
@@ -61,13 +59,11 @@
                                 // The user rejected the seats, so clear the seat selection and keep looking
 
                                 selSeat = -1;
-                                document.getElementById("seat" + (i * seats[i].length + j)).src = "seat_avail.png";
-                                document.getElementById("seat" + (i * seats[i].length + j)).alt = "Available seat";
-                                document.getElementById("seat" + (i * seats[i].length + j + 1)).src = "seat_avail.png";
-                                document.getElementById("seat" + (i * seats[i].length + j + 1)).alt = "Available seat";
-                                document.getElementById("seat" + (i * seats[i].length + j + 2)).src = "seat_avail.png";
-                                document.getElementById("seat" + (i * seats[i].length + j + 2)).alt = "Available seat";
 
+                                setSeat((i * seats[i].length + j), "avail", "Available seat");
+                                setSeat((i * seats[i].length + j + 1), "avail", "Available seat");
+                                setSeat((i * seats[i].length + j + 2), "avail", "Available seat");
+                                
                             }
                         }
                     }
@@ -75,6 +71,11 @@
                     //Increment the outer loop counter
                     i++;
                 }
+            }
+            function setSeat(seatNum, status, description) {
+                document.getElementById("seat" + seatNum).src = "seat_" + status + ".png";
+                document.getElementById("seat" + seatNum).alt = description;
+
             }
         </script>
     </head>
