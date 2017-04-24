@@ -1,0 +1,29 @@
+<html>
+    <head>
+        <title>非同步網頁測試計畫　／　Ajax with XML... Test Object</title>
+        <meta charset="utf-8" />
+        <meta name="theme-color" content="black" />
+        <link rel=stylesheet href="main_style.css" type="text/css">
+        <script src="main_js.js"></script>
+
+        <script>
+
+        </script>
+    </head>
+    <body>
+        <h3 class="title">Ajax 留言版</h3>
+        <!--<img src="title_pacher.jpg" alt="封面女郎" style="width: 240px"/>-->
+
+        <div id="blog"></div>
+
+        <input type="button" id="showall" value="Show All Blog Entries" />
+        <input type="button" id="viewrandom" value="View a Random Blog rntry" />
+
+        <div id="postPot">
+            Date: <input type="text" id="date" name="date" value="" size="10" /><br />
+            寫點什麼? <input type="text" id="body" name="body" value="" size="120" /><br />
+            Image <input type="text" id="image" name="image" value="" size="20" disabled="disabled"/>
+            <input type="button" value=">" id="add" onclick="loadDoc()" /><span id="status"></span>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,32 @@
+body {
+    background-image: url(title_pacher.jpg);
+    background-repeat: no-repeat;
+    background-color: #E2E2E2;
+    background-attachment: fixed;
+    background-position: 0% 100%;
+
+    margin: 0 9%;
+}
+
+#status {
+    /*animation: typing  steps(9) infinite, caret 1.5s steps(9) infinite;
+
+    width: 9em;*/
+}
+
+:before {
+    content: '';
+    position: absoluste;
+    top: 50%;
+    width: 1em;
+    height: 1em;
+    margin-top: -.5em;
+    border-top: 2px solid;
+    border-right: 2px solid;
+    opacity: .5;
+    -webkit-transition: -webkit-transform 2s ease-out;
+    transition: -webkit-transform 2s ease-out;
+    transition: transform 2s ease-out;
+    transition: transform 2s ease-out, -webkit-transform 2s ease-out;
+}
+

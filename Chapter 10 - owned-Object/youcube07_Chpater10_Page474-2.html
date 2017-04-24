@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>YouCube - The Blog for Cube Puzzlers</title>
+        <meta charset="utf-8" />
+        <meta name="theme-color" content="#CAA29D" />
+        <script type="text/javascript">
+        // Blog object constructor
+        // 物件類別  建構式construsctor
+        function Blog(body, date, image) {
+            // Assign the properties
+            // 實例特性 (instance property)
+            this.body = body
+            this.date = date;
+            this.image = image;
+            // 實例方法
+            this.somefunc = function(){};
+            
+            // 可以在標準物件(String)裡建立新的類別特性(class property)
+            // console.log(this.signature.scramble()); 
+            // console.log(this.date.shortFormat());
+            /*
+                在宣告方法在物件裡面名稱必須正確。 X:this.name()=function(){}; O:this.name=function(){};
+            */
+        }
+        // 類別方法 (class methdod)
+        Blog.showSignature = function() {
+            // alert("This blog created by " + Blog.prototype.signature + ".");
+            console.log("This blog created by " + Blog.prototype.signature + ".");
+        };
+        
+        Blog.blogSorter = function(blog1, blog2) {
+            return blog2.date - blog1.date
+        };
+        // 類別特性 (class property) 都隸屬於類別，只有單一一份可供實例取用
+        Blog.prototype.signature = "Puzzler Ruby";
+
+
+        // 類別擁有實例方法 (class-owned instance medthod)
+        // Return a string representation of the blog entry
+        Blog.prototype.toString = function() {  /* <= toString()方法回傳字串格式的部落格日誌。*/
+            return "[" + this.date.shortFormat() + "] " + this.body;
+        };
+
+        //Return a string    
+        Blog.prototype.toHTML = function(highlight) {   /*   <= toHTML() 方法回傳精美的HTML格式部落格日誌。*/
+            // Use a gray background as a highlight, if specified
+            var blogHTML = "";
+            
+            blogHTML += highlight ? "<p style='background-color:#EEEEEE'>" : "<p>";
+            // if (this.image) {
+            //     blogHTML += "<strong>" + this.date.shortFormat() +
+            //     "</strong><br /><table><tr><td><img src='" + this.image + 
+            //     "'/></td><td style='vertical-align: top'>" + this.body + "</td></tr></table><em>" +
+            //     this.signature + "</em></p>";
+            // }
+            // else {
+            //     blogHTML += "<strong>" + this.date.shortFormat() + "</strong><br />" + this.body + 
+            //     "<br /><em>" + this.signature + "</em></p>";
+            // }
+                    if (this.image) {
+            blogHTML += "<strong>" + this.date.shortFormat() + "</strong><br /><table><tr><td><img src='" +
+            this.image + "'/></td><td style='vertical-align: top'>" + this.body + "</td></tr></table><em>" +
+            this.signature + "</em></p>";
+        }
+        else {
+            blogHTML += "<strong>" + this.date.shortFormat() + "</strong><br />" + this.body +
+            "<br /><em>" + this.signature + "</em></p>";
+        }
+
+            return blogHTML
+        };
+
+        // See if the blog body contains a string of text
+        Blog.prototype.containsText = function(text) {  /* <= ContainsText()方法在日誌本文包含搜索目標字串時，回傳ture; 為找到回傳false。*/
+            return (this.body.toLowerCase().indexOf(text.toLowerCase()) != -1 );
+            // Property & Method?? date & action??
+        };
+
+        Date.prototype.shortFormat = function() {
+            return (this.getMonth() + 1) + "/" + this.getDate() + "/" + this.getFullYear();
+        };
+
+        String.prototype.scramble = function() {
+            return "luzPrb uzyRe";
+        };
+        
+        // 物件實例
+        // Global arr of blog Enteries
+        var blog = [ new Blog("Got the new cube I ordered..", new Date("08/14/2008")),
+                     new Blog("Solved the new cube but of course...", new Date("08/19/2008")),
+                     new Blog("Managed to get a headache toiling...", new Date("08/16/2008")),
+                     new Blog("Attended a rally outside of a local toy store...", new Date("09/03/2008")),   
+                     new Blog("Wow, it took me a couple of weeks but the new cube is finally solveed!", new Date("09/19/2008"), "cube777.png"),   
+                     new Blog("Found a 7x7x7 cube for sale online...", new Date("08/21/2008")) ];
+
+        //Show the list of blog entries
+        function showBlog(numEntries) {
+            // console.log(blog);   // 排序前
+            // blog.sort(function(a, b){return a - b;});
+            // console.log(blog);   // 排序後
+
+            blog.sort(Blog.blogSorter);
+            //Adjust the number of entries to show the full blog, if necessary
+            if(!numEntries)
+                numEntries = body.length;
+            
+            //Show the blog ebtries
+            var i=0, blogListHTML="";
+            while (i < blog.length && i < numEntries) {
+                blogListHTML += blog[i].toHTML(i % 2 == 0);   // <= toHTML()方法全面負責HTML格式加到部落格日誌上的事宜。
+                i++;
+            }
+        console.log(blogListHTML);
+            // Set the blog HTML code on the page
+            document.getElementById("blog").innerHTML = blogListHTML;
+        }
+        // function getDayBetween(date1, date2) {
+        //     var daysBetween = (date1 - date2)/(1000*60*60*24);
+        //     return Math.round(daysBetween);
+        // }
+        function searchBlog() {
+            var searchText = document.getElementById("searchtext").value;
+            if(searchText == "") {
+                alert("Please enter a Search Text. ");
+                return false;
+            }
+
+
+            for (var i=0 ; i<blog.length ; i++) {
+                // See if the blog entry contains the search text
+                if (blog[i].containsText(searchText)) {  // <= containsText()方法於部落格日誌中搜索子字串。
+                    alert(blog[i]);                      // <= toString()方法比較精密，他於期待部落格日誌是字串格事實自動受到呼叫。 
+                    break;
+                }
+            }
+
+            // If the search text wasn't found, display a message
+            // i == blog.length && alert("Sorry, there are no blog entries containing the search text.");
+            if (i == blog.length)
+                alert("Sorry, there are no blog entries containing the search text.");
+        }
+        function randomBlog() {
+            // Pick a random number between 0 and Blog.length-1
+            var r = Math.floor(Math.random()*blog.length);
+            alert(blog[r]);
+        }
+
+        Blog.showSignature();
+        </script>
+    </head>
+    <body onload="showBlog(1);">
+        <h3>YouCube - The Blog for Cube Puzzlers</h3>
+        <img src="cube.png" alt="林北屁孩-阿某哩金麻西低跨啥小" />
+        <input type="button" id="search"  value="Search the Blog" onclick="searchBlog();" />
+        <input type="text" id="searchtext" name="searchtext" value="" />
+        <div id="blog"></div>
+        <input type="button" id="showall" value="Show All Blog Enteries" onclick="showBlog(5);" />
+        <input type="button" id="random" value="View a Random Blog Entry" onclick="randomBlog();" />
+        
+    </body>
+</html>
